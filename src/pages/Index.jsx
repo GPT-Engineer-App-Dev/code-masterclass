@@ -1,7 +1,24 @@
-import { Box, Container, VStack, Text, Heading, Button, Flex, SimpleGrid, Image, Stack } from "@chakra-ui/react";
+import { Box, Container, VStack, Text, Heading, Button, Flex, SimpleGrid, Image, Stack, useToast } from "@chakra-ui/react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Index = () => {
+  const [enrolledCourses, setEnrolledCourses] = useState([]);
+  const toast = useToast();
+
+  const handleEnroll = (course) => {
+    const updatedEnrolledCourses = [...enrolledCourses, course];
+    setEnrolledCourses(updatedEnrolledCourses);
+    localStorage.setItem("enrolledCourses", JSON.stringify(updatedEnrolledCourses));
+    toast({
+      title: "Enrollment Successful",
+      description: `You have enrolled in ${course.title}`,
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
   return (
     <Container maxW="container.xl" p={0}>
       {/* Navigation Bar */}
@@ -23,6 +40,7 @@ const Index = () => {
             <Link to="/courses" style={{ margin: "0 1rem" }}>Courses</Link>
             <Link to="/about" style={{ margin: "0 1rem" }}>About</Link>
             <Link to="/contact" style={{ margin: "0 1rem" }}>Contact</Link>
+            <Link to="/enrolled-courses" style={{ margin: "0 1rem" }}>Enrolled Courses</Link>
           </Flex>
         </Box>
       </Flex>
@@ -44,6 +62,7 @@ const Index = () => {
               <Heading as="h4" size="md" mb={2}>Course Title 1</Heading>
               <Text mb={4}>Brief description of the course.</Text>
               <Button colorScheme="teal">Learn More</Button>
+              <Button colorScheme="teal" onClick={() => handleEnroll({ title: "Course Title 1" })}>Enroll</Button>
             </Box>
           </Box>
           <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -52,6 +71,7 @@ const Index = () => {
               <Heading as="h4" size="md" mb={2}>Course Title 2</Heading>
               <Text mb={4}>Brief description of the course.</Text>
               <Button colorScheme="teal">Learn More</Button>
+              <Button colorScheme="teal" onClick={() => handleEnroll({ title: "Course Title 2" })}>Enroll</Button>
             </Box>
           </Box>
           <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -60,6 +80,7 @@ const Index = () => {
               <Heading as="h4" size="md" mb={2}>Course Title 3</Heading>
               <Text mb={4}>Brief description of the course.</Text>
               <Button colorScheme="teal">Learn More</Button>
+              <Button colorScheme="teal" onClick={() => handleEnroll({ title: "Course Title 3" })}>Enroll</Button>
             </Box>
           </Box>
         </SimpleGrid>
