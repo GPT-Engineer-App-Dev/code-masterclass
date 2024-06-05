@@ -41,6 +41,7 @@ const Index = () => {
             <Link to="/about" style={{ margin: "0 1rem" }}>About</Link>
             <Link to="/contact" style={{ margin: "0 1rem" }}>Contact</Link>
             <Link to="/enrolled-courses" style={{ margin: "0 1rem" }}>Enrolled Courses</Link>
+            <Link to="/code-editor" style={{ margin: "0 1rem" }}>Code Editor</Link>
           </Flex>
         </Box>
       </Flex>
